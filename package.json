@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "My Moleculer microservices project",
   "scripts": {
-    "dev": "moleculer-runner --repl --hot services",
+    "dev": "moleculer-runner --env --repl --hot services",
     "start": "moleculer-runner",
     "cli": "moleculer connect ",
     "ci": "jest --watch",
@@ -26,7 +26,13 @@
     "moleculer-repl": "^0.5.7"
   },
   "dependencies": {
-    "moleculer": "^0.13.9"
+    "@bit/amazingdesign.utils.config": "^1.0.0",
+    "aws-sdk": "^2.614.0",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^8.9.2",
+    "form-data": "^3.0.0",
+    "moleculer": "^0.13.9",
+    "moment": "^2.24.0"
   },
   "engines": {
     "node": ">= 8.x.x"

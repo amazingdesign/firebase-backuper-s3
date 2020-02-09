@@ -1,6 +1,6 @@
 {
   "name": "firebase-backuper-s3",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "My Moleculer microservices project",
   "scripts": {
     "dev": "moleculer-runner --env --repl --hot services",

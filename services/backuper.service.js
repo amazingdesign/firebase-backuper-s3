@@ -3,7 +3,7 @@
 
 const { getConfig, getConfigOrFail } = require('@bit/amazingdesign.utils.config')
 
-const intervalTime = getConfig('INTERVAL_TIME') || 24 * 60 * 60 * 1000
+const intervalTime = Number(getConfig('INTERVAL_TIME') || 24 * 60 * 60 * 1000)
 
 // MOMENT
 const moment = require('moment')
@@ -90,7 +90,7 @@ module.exports = {
 
     this.settings.intervalId = setInterval(
       () => this.backup(),
-      Number(intervalTime)
+      intervalTime
     )
 
     this.backup()

@@ -3,6 +3,8 @@
 
 const { getConfig, getConfigOrFail } = require('@bit/amazingdesign.utils.config')
 
+const intervalTime = getConfig('INTERVAL_TIME') || 24 * 60 * 60 * 1000
+
 // MOMENT
 const moment = require('moment')
 const dateTimeFormat = getConfig('DATE_TIME_FORMAT') || 'DD-MM-YYYY:HH:ss'
@@ -39,6 +41,7 @@ module.exports = {
 
       return admin.database().ref(path).once('value')
         .then(snapshot => {
+          this.logger.info('DATA FETCHED!')
           return JSON.stringify(snapshot.val())
         })
         .catch(error => {
@@ -49,6 +52,8 @@ module.exports = {
         })
     },
     saveJSONToS3(content) {
+      this.logger.info('SAVING TO S3...')
+
       const params = {
         Bucket: getConfigOrFail('AWS_BUCKET_NAME'),
         Key: `${directory}/${moment().format(dateTimeFormat)}.json`,
@@ -60,8 +65,10 @@ module.exports = {
           params,
           (err, data) => {
             if (err) {
+              this.logger.info('SAVING TO S3 FAILURE!')
               reject(err)
             } else {
+              this.logger.info('SAVING TO S3 SUCCESS!')
               resolve()
             }
           }
@@ -77,7 +84,17 @@ module.exports = {
   },
 
   started() {
+    this.logger.info(
+      `SETTING INTERVAL TO BACKUP EVERY ${intervalTime} ms (${moment().to(Date.now() + intervalTime, true)})`
+    )
+
+    this.settings.intervalId = setInterval(
+      () => this.backup(),
+      Number(intervalTime)
+    )
+
     this.backup()
+
   },
 
   stopped() {

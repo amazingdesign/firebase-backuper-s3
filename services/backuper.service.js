@@ -20,7 +20,7 @@ admin.initializeApp({
 
 // S3
 const AWS = require('aws-sdk')
-const directory = getConfigOrFail('S3_DIRECTORY') || dbName
+const directory = getConfig('S3_DIRECTORY') || dbName
 const s3 = new AWS.S3({
   accessKeyId: getConfigOrFail('AWS_ID'),
   secretAccessKey: getConfigOrFail('AWS_SECRET'),

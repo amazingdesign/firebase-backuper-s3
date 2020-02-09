@@ -1,81 +1,72 @@
-"use strict";
+'use strict'
 
 module.exports = {
-	name: "greeter",
+  name: 'greeter',
 
-	/**
+  /**
 	 * Service settings
 	 */
-	settings: {
+  settings: {
+    intervalId: null
+  },
 
-	},
-
-	/**
+  /**
 	 * Service dependencies
 	 */
-	dependencies: [],	
+  dependencies: [],
 
-	/**
+  /**
 	 * Actions
 	 */
-	actions: {
+  actions: {
 
-		/**
+    /**
 		 * Say a 'Hello'
 		 *
 		 * @returns
 		 */
-		hello() {
-			return "Hello Moleculer";
-		},
+    hello() {
+      return 'Hello Moleculer'
+    },
 
-		/**
+    /**
 		 * Welcome a username
 		 *
 		 * @param {String} name - User name
 		 */
-		welcome: {
-			params: {
-				name: "string"
-			},
-			handler(ctx) {
-				return `Welcome, ${ctx.params.name}`;
-			}
-		}
-	},
+    welcome: {
+      params: {
+        name: 'string'
+      },
+      handler(ctx) {
+        return `Welcome, ${ctx.params.name}`
+      }
+    }
+  },
 
-	/**
+  /**
 	 * Events
 	 */
-	events: {
+  events: {
 
-	},
+  },
 
-	/**
+  /**
 	 * Methods
 	 */
-	methods: {
+  methods: {
 
-	},
+  },
 
-	/**
-	 * Service created lifecycle event handler
-	 */
-	created() {
+  created() {
 
-	},
+  },
 
-	/**
-	 * Service started lifecycle event handler
-	 */
-	started() {
+  started() {
 
-	},
+  },
 
-	/**
-	 * Service stopped lifecycle event handler
-	 */
-	stopped() {
+  stopped() {
 
-	}
-};
+  }
+}

@@ -10,7 +10,10 @@
     "test": "jest --coverage",
     "lint": "eslint . --fix",
     "dc:up": "docker-compose up --build -d",
-    "dc:down": "docker-compose down"
+    "dc:down": "docker-compose down",
+    "docker": "docker build . -t harbor.amazingdesign.eu/backupers/firebase-backuper-s3:$(sed -nE 's/^\\s*\"version\": \"(.*?)\",$/\\1/p' package.json)",
+    "docker:push": "docker push harbor.amazingdesign.eu/backupers/firebase-backuper-s3:$(sed -nE 's/^\\s*\"version\": \"(.*?)\",$/\\1/p' package.json)",
+    "docker:deploy": "npm run docker && npm run docker:push"
   },
   "keywords": [
     "microservices",

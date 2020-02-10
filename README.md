@@ -1,14 +1,33 @@
-[![Moleculer](https://badgen.net/badge/Powered%20by/Moleculer/0e83cd)](https://moleculer.services)
+# firebase-backuper-s3
 
-# https://github.com/chomamateusz/moleculer-template-project
+This is a simple NodeJS service written using [Moleculer Framework](https://moleculer.services/) to fetch and backup your Realtime Database from Firebase to Amazon S3.
 
-## NPM scripts
+## Configuration
 
-- `npm run dev`: Start development mode (load all services locally with hot-reload & REPL)
-- `npm run start`: Start production mode (set `SERVICES` env variable to load certain services)
-- `npm run cli`: Start a CLI and connect to production. Don't forget to set production namespace with `--ns` argument in script
-- `npm run lint`: Run ESLint
-- `npm run ci`: Run continuous test mode with watching
-- `npm test`: Run tests & generate coverage report
-- `npm run dc:up`: Start the stack with Docker Compose
-- `npm run dc:down`: Stop the stack with Docker Compose
+You must specify `.env` file with vars as they are described in [.env.example](.env.example).
+
+Notice that only ASW related variables are required, but others can be useful to fetch only part of your DB or schedule recurring backups.
+
+This app connect to Firebase through service account .json file. The file can be found in your Firebase project console in Settings > Project Settings in Service accounts tab.
+
+You must put the file as `secure-service-account.json` in main folder or mount in `/app` folder when using Docker.
+
+## Usage
+
+When `.env` file and `secure-service-account.json` are present you can run app with:
+
+```bash
+npm install
+
+npm start
+```
+
+or using Docker:
+
+```bash
+docker build . --tag firebase-backuper-s3
+
+docker run firebase-backuper-s3 \
+  --env-file /path/to/your/.env
+  -v /path/to/your/secure-service-account.json:/app/secure-service-account.json
+```
